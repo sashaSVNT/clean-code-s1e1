@@ -31,6 +31,7 @@ var createNewTaskElement = function (taskString) {
     //button.delete
     var deleteButton = document.createElement("button");//delete button
     var deleteButtonImg = document.createElement("img");//delete button image
+    deleteButtonImg.classList.add("delete-img");
 
     label.innerText = taskString;
     label.className = 'task';
@@ -41,9 +42,9 @@ var createNewTaskElement = function (taskString) {
     editInput.className = "task";
 
     editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className = "edit";
+    editButton.classList.add("common-button", "edit");
 
-    deleteButton.className = "delete";
+    deleteButton.classList.add("common-button", "delete");
     deleteButtonImg.src = './remove.svg';
     deleteButton.appendChild(deleteButtonImg);
 
@@ -85,7 +86,7 @@ var editTask = function () {
     var editInput = listItem.querySelector('input[type=text]');
     var label = listItem.querySelector("label");
     var editBtn = listItem.querySelector(".edit");
-    var containsClass = listItem.classList.contains("editMode");
+    var containsClass = listItem.classList.contains("edit-mode");
     //If class of the parent is .editmode
     if (containsClass) {
 
@@ -99,7 +100,7 @@ var editTask = function () {
     }
 
     //toggle .editmode on the parent.
-    listItem.classList.toggle("editMode");
+    listItem.classList.toggle("edit-mode");
 };
 
 

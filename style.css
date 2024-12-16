@@ -32,8 +32,13 @@
   display: inline-block;
   flex-grow: 1;
 }
+.task-input {
+  width: 100%;
+}
+
 .task-row {
   display: flex;
+  justify-content: space-between;
 }
 ul {
   margin: 0;
@@ -145,6 +150,10 @@ button{
 .task-input {
   display: inline-block;
   width: 224px;
+}
+#new-task {
+  display: flex;
+  width: 100%;
 }
 .edit-mode 
 .task {
