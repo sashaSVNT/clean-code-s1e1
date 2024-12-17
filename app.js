@@ -18,6 +18,7 @@ var completedTasksHolder = document.getElementById("completed-tasks");//complete
 var createNewTaskElement = function (taskString) {
 
     var listItem = document.createElement("li");
+    listItem.classList.add("tasks-item");
 
     //input (checkbox)
     var checkBox = document.createElement("input");//checkbx
@@ -32,14 +33,17 @@ var createNewTaskElement = function (taskString) {
     var deleteButton = document.createElement("button");//delete button
     var deleteButtonImg = document.createElement("img");//delete button image
     deleteButtonImg.classList.add("delete-img");
+    var buttonGroup = document.createElement('div');
+    buttonGroup.classList.add("button-group");
 
     label.innerText = taskString;
     label.className = 'task';
 
     //Each elements, needs appending
     checkBox.type = "checkbox";
+    checkBox.classList.add('checkbox');
     editInput.type = "text";
-    editInput.className = "task";
+    editInput.classList.add("task-input");
 
     editButton.innerText = "Edit"; //innerText encodes special characters, HTML does not.
     editButton.classList.add("common-button", "edit");
@@ -53,8 +57,9 @@ var createNewTaskElement = function (taskString) {
     listItem.appendChild(checkBox);
     listItem.appendChild(label);
     listItem.appendChild(editInput);
-    listItem.appendChild(editButton);
-    listItem.appendChild(deleteButton);
+    buttonGroup.append(editButton, deleteButton);
+    listItem.appendChild(buttonGroup);
+    // listItem.appendChild(deleteButton);
     return listItem;
 }
 
@@ -81,7 +86,7 @@ var editTask = function () {
     console.log("Change 'edit' to 'save'");
 
 
-    var listItem = this.parentNode;
+    var listItem = this.parentNode.parentNode;
 
     var editInput = listItem.querySelector('input[type=text]');
     var label = listItem.querySelector("label");
@@ -108,7 +113,7 @@ var editTask = function () {
 var deleteTask = function () {
     console.log("Delete Task...");
 
-    var listItem = this.parentNode;
+    var listItem = this.parentNode.parentNode;
     var ul = listItem.parentNode;
     //Remove the parent list item from the ul.
     ul.removeChild(listItem);
@@ -156,9 +161,9 @@ addButton.addEventListener("click", ajaxRequest);
 var bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
     console.log("bind list item events");
     //select ListItems children
-    var checkBox = taskListItem.querySelector("input[type=checkbox]");
-    var editButton = taskListItem.querySelector("button.edit");
-    var deleteButton = taskListItem.querySelector("button.delete");
+    var checkBox = taskListItem.querySelector(".checkbox");
+    var editButton = taskListItem.querySelector(".edit");
+    var deleteButton = taskListItem.querySelector(".delete");
 
 
     //Bind editTask to edit button.
